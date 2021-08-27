@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Imagem from '../../commons/trash.svg';
 import './ListaCompras.css';
 
-function ListaCompras(props){
+function TabelaCompras(props){
 
-    const [produtos, setProdutos] = useState(props.produtos);
-    const [produtosExluidos, setProdutosExcluidos] = useState([]);
-
-    const handlerExcluirClick = (key) => {
-        setProdutosExcluidos(produtos.filter(prod => prod.codigo === key));
-        setProdutos(produtos.filter(prod => prod.codigo !== key));
-    };
+    const produtos = props.produtos;
+    const handlerExcluirClick = props.handlerExcluirClick;
 
     return (
         <div className="p-4">
@@ -51,4 +46,4 @@ function ListaCompras(props){
 
 }
 
-export default ListaCompras;
+export default TabelaCompras;
