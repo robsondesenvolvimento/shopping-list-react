@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import Imagem from '../../trash.svg';
+import Imagem from '../../commons/trash.svg';
+import './ListaCompras.css';
 
 function ListaCompras(props){
 
     const [produtos] = useState(props.produtos);
 
+    const handlerExcluirClick = props.handlerExcluirClick;
+
     return (
-        <div>
+        <div className="p-4">
             <table className="table table-sm">
                 <thead className="thead-dark">
                     <tr>
@@ -25,16 +28,17 @@ function ListaCompras(props){
                             <td>{value.produto}</td>
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
-                            <td>R$ {value.valor}</td>
-                            <td><img className="bi me-2" width="20" height="20" src={Imagem} alt="Lixeira"/></td>
+                            <td>R$ {value.valor.toFixed(2)}</td>
+                            <td><img className="bi me-2 icontrash" width="20" height="20" src={Imagem} alt="Lixeira" onClick={handlerExcluirClick}/></td>
                         </tr>
                     ))}                    
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="row">Total</th>
+                        <th scope="row"><abbr title="Soma total do valor de todos os produtos." class="initialism">Total</abbr></th>
                         <th colSpan="3" style={{"text-align": "left"}}></th>
-                        <td>R$ {produtos.reduce((accumulator, currentValue) => accumulator + currentValue.valor, 0)}</td>
+                        <td className="h6">R$ {produtos.reduce((accumulator, currentValue) => accumulator + currentValue.valor, 0).toFixed(2)}</td>
+                        <th></th>
                     </tr>
                 </tfoot>
             </table>
