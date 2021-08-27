@@ -13,11 +13,11 @@ function App() {
     { codigo: 6, produto: "Celular", descricao: "Samsung", quantidade: 1, valor: 2080.00 }
     ));
 
-  const handlerExcluirClick = () => alert("Teste de clique.");
+  
 
   return (
     <div className="App">
-      <ListaCompras produtos={produtos} handlerExcluirClick={handlerExcluirClick}/>
+      <ListaCompras produtos={produtos} />
     </div>
   );
 }
