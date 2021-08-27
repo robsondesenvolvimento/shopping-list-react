@@ -1,11 +1,11 @@
 import React from 'react';
-import Imagem from '../../commons/trash.svg';
-import './ListaCompras.css';
+import './TabelaCompras.css';
 
 function TabelaCompras(props){
 
-    const produtos = props.produtos;
-    const handlerExcluirClick = props.handlerExcluirClick;
+    const produtos = props.produtos.sort((a,b) => a.codigo - b.codigo);
+    const handlerClick = props.handlerExcluirClick;
+    const Imagem = props.imagem;
 
     return (
         <div className="p-4">
@@ -28,7 +28,7 @@ function TabelaCompras(props){
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
                             <td>R$ {value.valor.toFixed(2)}</td>
-                            <td><img className="bi me-2 icontrash" width="20" height="20" src={Imagem} alt="Lixeira" onClick={() => handlerExcluirClick(value.codigo)}/></td>
+                            <td><img className="bi me-2 icontrash" width="20" height="20" src={Imagem} alt="Lixeira" onClick={() => handlerClick(value.codigo)}/></td>
                         </tr>
                     ))}                    
                 </tbody>
