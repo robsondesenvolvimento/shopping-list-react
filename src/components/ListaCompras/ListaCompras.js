@@ -4,6 +4,8 @@ import trashpreto from '../../commons/trash-preto.svg';
 import trashcinza from '../../commons/trash-cinza.svg';
 import turnleft from '../../commons/turn-left.svg';
 import turnleftcinza from '../../commons/turn-left-cinza.svg';
+import star from '../../commons/star.svg';
+import starcinza from '../../commons/star-cinza.svg';
 
 function ListaCompras(props){
 
@@ -11,7 +13,10 @@ function ListaCompras(props){
     const [produtosExluidos, setProdutosExcluidos] = useState([]);
 
     const handlerExcluirClick = (key) => {
-        setProdutosExcluidos(produtosExluidos.concat(produtos.filter(prod => prod.codigo === key)));
+        const prodExcl = produtos.filter(prod => prod.codigo === key);
+        prodExcl[0].favorito = false;
+        setProdutosExcluidos(produtosExluidos.concat(prodExcl));
+
         setProdutos(produtos.filter(prod => prod.codigo !== key));
     };
 
@@ -19,6 +24,19 @@ function ListaCompras(props){
         setProdutos(produtos.concat(produtosExluidos.filter(prod => prod.codigo === key)));
         setProdutosExcluidos(produtosExluidos.filter(prod => prod.codigo !== key));
     };
+
+    const handlerFavoritoClick = (key) => {
+        const listaProdFav = produtos.map(value => {
+
+            if(value.favorito === true && value.codigo === key)
+                value.favorito = false;
+            else if(value.favorito === false && value.codigo === key)
+                value.favorito = true;
+            return value;
+        });
+
+        setProdutos(listaProdFav);
+    }
 
     const handlerFormSubmit = (event) => {
         event.preventDefault();
@@ -34,11 +52,12 @@ function ListaCompras(props){
             produto: produto, 
             descricao: descricao, 
             quantidade: Number.parseInt(quantidade), 
-            valor: Number.parseFloat(valor) 
+            valor: Number.parseFloat(valor),
+            favorito: false
         };
 
         setProdutos(produtos.concat(prod))
-    }
+    };
 
     return (
         <div className="p-4">
@@ -65,10 +84,10 @@ function ListaCompras(props){
             </div>
 
             <h3 className="alert alert-primary">Lista de compras</h3>
-            <TabelaCompras produtos={produtos} handlerExcluirClick={handlerExcluirClick} imagem={[trashpreto,trashcinza]} descricaoTotal="Soma do valor de todos os produtos."/>
+            <TabelaCompras produtos={produtos} handlerExcluirClick={handlerExcluirClick} handlerFavoritoClick={(handlerFavoritoClick)} imagem={[trashpreto,trashcinza,star,starcinza]} descricaoTotal="Soma do valor de todos os produtos."/>
 
             <h3 className="alert alert-danger">Lista de compras excluidas</h3>
-            <TabelaCompras produtos={produtosExluidos} handlerExcluirClick={handlerExcluidosClick} imagem={[turnleft,turnleftcinza]} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
+            <TabelaCompras produtos={produtosExluidos} handlerExcluirClick={handlerExcluidosClick} handlerFavoritoClick={() => {}} imagem={[turnleft,turnleftcinza,star,starcinza]} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
         </div>
     )
 
