@@ -5,7 +5,8 @@ function TabelaCompras(props){
 
     const produtos = props.produtos.sort((a,b) => a.codigo - b.codigo);
     const handlerClick = props.handlerExcluirClick;
-    const Imagem = props.imagem;
+    const imagem = props.imagem;
+    const descricaoTotal = props.descricaoTotal;
 
     return (
         <div className="p-4">
@@ -28,13 +29,13 @@ function TabelaCompras(props){
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
                             <td>R$ {value.valor.toFixed(2)}</td>
-                            <td><img className="bi me-2 icontrash" width="20" height="20" src={Imagem} alt="Lixeira" onClick={() => handlerClick(value.codigo)}/></td>
+                            <td><img className="bi me-2 icontrash" width="20" height="20" src={imagem} alt="Lixeira" onClick={() => handlerClick(value.codigo)}/></td>
                         </tr>
                     ))}                    
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="row"><abbr title="Soma total do valor de todos os produtos." class="initialism">Total</abbr></th>
+                        <th scope="row"><abbr title={descricaoTotal} class="initialism">Total</abbr></th>
                         <th colSpan="3" style={{"text-align": "left"}}></th>
                         <td className="h6">R$ {produtos.reduce((accumulator, currentValue) => accumulator + currentValue.valor, 0).toFixed(2)}</td>
                         <th></th>
