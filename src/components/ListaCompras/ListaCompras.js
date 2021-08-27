@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { TabelaCompras } from '../TabelaCompras';
-import ImagemTrash from '../../commons/trash-preto.svg';
-import ImagemExclude from '../../commons/turn-left.svg';
+import trashpreto from '../../commons/trash-preto.svg';
+import trashcinza from '../../commons/trash-cinza.svg';
+import turnleft from '../../commons/turn-left.svg';
+import turnleftcinza from '../../commons/turn-left-cinza.svg';
 
 function ListaCompras(props){
 
@@ -21,10 +23,10 @@ function ListaCompras(props){
     return (
         <div className="p-4">
             <h3 className="alert alert-primary">Lista de compras</h3>
-            <TabelaCompras produtos={produtos} handlerExcluirClick={handlerExcluirClick} imagem={ImagemTrash} descricaoTotal="Soma do valor de todos os produtos."/>
+            <TabelaCompras produtos={produtos} handlerExcluirClick={handlerExcluirClick} imagem={[trashpreto,trashcinza]} descricaoTotal="Soma do valor de todos os produtos."/>
 
             <h3 className="alert alert-danger">Lista de compras excluidas</h3>
-            <TabelaCompras produtos={produtosExluidos} handlerExcluirClick={handlerExcluidosClick} imagem={ImagemExclude} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
+            <TabelaCompras produtos={produtosExluidos} handlerExcluirClick={handlerExcluidosClick} imagem={[turnleft,turnleftcinza]} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
         </div>
     )
 
