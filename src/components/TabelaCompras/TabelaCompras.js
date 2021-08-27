@@ -3,8 +3,10 @@ import './TabelaCompras.css';
 
 function TabelaCompras(props){
 
-    const produtos = props.produtos.sort((a,b) => a.codigo - b.codigo);
+    let produtos = props.produtos.sort((a,b) => a.codigo - b.codigo);
+    produtos = produtos.sort((a,b) => !a.favorito - !b.favorito)
     const handlerClick = props.handlerExcluirClick;
+    const handlerFavoritoClick = props.handlerFavoritoClick;
     const imagem = props.imagem;
     const descricaoTotal = props.descricaoTotal;
 
@@ -13,7 +15,8 @@ function TabelaCompras(props){
             <table className="table table-sm">
                 <thead className="thead-dark">
                     <tr>
-                        <th className="w-10">Código</th>
+                        <th scope="col" className="w-5">Código</th>
+                        <th scope="col" className="w-5">Favorito</th>
                         <th scope="col" className="w-25">Nome</th>
                         <th scope="col" className="w-25">Descrição</th>
                         <th scope="col" className="w-10">Quantidade</th>
@@ -25,6 +28,7 @@ function TabelaCompras(props){
                     {produtos.map((value, index) => (
                         <tr key={value.codigo}>
                             <th scope="row">{value.codigo}</th>
+                            <td><img className="bi me-2 icontrash" width="20" height="20" src={imagem[value.favorito?2:3]} alt="Lixeira" onClick={() => handlerFavoritoClick(value.codigo)}/></td>
                             <td>{value.produto}</td>
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
@@ -36,7 +40,7 @@ function TabelaCompras(props){
                 <tfoot>
                     <tr>
                         <th scope="row"><abbr title={descricaoTotal} class="initialism">Total</abbr></th>
-                        <th colSpan="2" style={{"text-align": "left"}}></th>
+                        <th colSpan="3" style={{"text-align": "left"}}></th>
                         <td className="h6">{produtos.reduce((accumulator, currentValue) => accumulator + currentValue.quantidade, 0)}</td>
                         <td className="h6">R$ {produtos.reduce((accumulator, currentValue) => accumulator + currentValue.valor, 0).toFixed(2)}</td>
                         <th></th>
