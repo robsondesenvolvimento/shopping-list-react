@@ -1,4 +1,5 @@
 import React from 'react';
+import {StarIcon, StarFillIcon, TrashIcon, ReplyIcon} from '@primer/octicons-react'
 import './TabelaCompras.css';
 
 function TabelaCompras(props){
@@ -7,8 +8,8 @@ function TabelaCompras(props){
     produtos = produtos.sort((a,b) => !a.favorito - !b.favorito)
     const handlerClick = props.handlerExcluirClick;
     const handlerFavoritoClick = props.handlerFavoritoClick;
-    const imagem = props.imagem;
     const descricaoTotal = props.descricaoTotal;
+    const tipoLista = props.tipoLista;
 
     return (
         <div className="p-4">
@@ -21,19 +22,19 @@ function TabelaCompras(props){
                         <th scope="col" className="w-25">Descrição</th>
                         <th scope="col" className="w-10">Quantidade</th>
                         <th scope="col" className="w-5">Valor</th>
-                        <th className="w-5"><img className="bi me-2" width="20" height="20" src={imagem[1]} alt="Lixeira"/></th>
+                        <th scope="col" className="w-5">{tipoLista==="produtos"?<TrashIcon size={16}/>:<ReplyIcon size={16}/>}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {produtos.map((value, index) => (
                         <tr key={value.codigo}>
                             <th scope="row">{value.codigo}</th>
-                            <td><img className="bi me-2 icontrash" width="20" height="20" src={imagem[value.favorito?2:3]} alt="Lixeira" onClick={() => handlerFavoritoClick(value.codigo)}/></td>
+                            <td><a className="bi me-2 icontrash" href="#" onClick={() => handlerFavoritoClick(value.codigo)}>{value.favorito?<StarFillIcon size={16}/>:<StarIcon size={16}/>}</a></td>
                             <td>{value.produto}</td>
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
                             <td>R$ {value.valor.toFixed(2)}</td>
-                            <td><img className="bi me-2 icontrash" width="20" height="20" src={imagem[0]} alt="Lixeira" onClick={() => handlerClick(value.codigo)}/></td>
+                            <td><a className="bi me-2 icontrash" href="#" onClick={() => handlerClick(value.codigo)}>{tipoLista==="produtos"?<TrashIcon size={16}/>:<ReplyIcon size={16}/>}</a></td>
                         </tr>
                     ))}                    
                 </tbody>

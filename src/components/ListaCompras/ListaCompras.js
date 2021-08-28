@@ -84,10 +84,10 @@ function ListaCompras(props){
             </div>
 
             <h3 className="alert alert-primary">Lista de compras</h3>
-            <TabelaCompras produtos={produtos} handlerExcluirClick={handlerExcluirClick} handlerFavoritoClick={(handlerFavoritoClick)} imagem={[trashpreto,trashcinza,star,starcinza]} descricaoTotal="Soma do valor de todos os produtos."/>
+            <TabelaCompras produtos={produtos} tipoLista="produtos" handlerExcluirClick={handlerExcluirClick} handlerFavoritoClick={(handlerFavoritoClick)} descricaoTotal="Soma do valor de todos os produtos."/>
 
             <h3 className="alert alert-danger">Lista de compras excluidas</h3>
-            <TabelaCompras produtos={produtosExluidos} handlerExcluirClick={handlerExcluidosClick} handlerFavoritoClick={() => {}} imagem={[turnleft,turnleftcinza,star,starcinza]} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
+            <TabelaCompras produtos={produtosExluidos} tipoLista="excluidos" handlerExcluirClick={handlerExcluidosClick} handlerFavoritoClick={() => {}} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
         </div>
     )
 
