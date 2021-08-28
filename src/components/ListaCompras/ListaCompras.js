@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
 import { TabelaCompras } from '../TabelaCompras';
-import trashpreto from '../../commons/trash-preto.svg';
-import trashcinza from '../../commons/trash-cinza.svg';
-import turnleft from '../../commons/turn-left.svg';
-import turnleftcinza from '../../commons/turn-left-cinza.svg';
-import star from '../../commons/star.svg';
-import starcinza from '../../commons/star-cinza.svg';
 
 function ListaCompras(props){
 
