@@ -74,7 +74,7 @@ function ListaCompras(props){
                             <input type="number" id="fquantidade" pattern="[0-9]+" min="1" max="50" title="Quantidade de produtos." className="form-control form-control-sm" placeholder="Quantidade" required/>
                         </div>
                         <div className="col p-1">
-                            <input type="number" id="fvalor" pattern="[0-9]+" className="form-control form-control-sm" placeholder="Valor" required/>
+                            <input type="text" id="fvalor" pattern="[0-9]+(\.[0-9]+)?" className="form-control form-control-sm" placeholder="Valor" required/>
                         </div>
                             <div className="col p-1">
                         <button type="submit" className="btn btn-primary mb-2">Inserir produto</button>
