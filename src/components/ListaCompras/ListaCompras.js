@@ -65,16 +65,16 @@ function ListaCompras(props){
                 <form className="form-inline" onSubmit={handlerFormSubmit}>
                     <div className="form-group">
                         <div className="col p-1">
-                            <input type="text" id="fproduto" className="form-control form-control-sm" placeholder="Produto"/>
+                            <input type="text" id="fproduto" maxlength="30" className="form-control form-control-sm" placeholder="Produto" required/>
                         </div>
                         <div className="col p-1">
-                            <input type="text" id="fdescricao" className="form-control form-control-sm" placeholder="Descrição"/>
+                            <input type="text" id="fdescricao" maxlength="30" className="form-control form-control-sm" placeholder="Descrição" required/>
                         </div>
                         <div className="col p-1">
-                            <input type="text" id="fquantidade" className="form-control form-control-sm" placeholder="Quantidade"/>
+                            <input type="number" id="fquantidade" pattern="[0-9]+" min="1" max="50" title="Quantidade de produtos." className="form-control form-control-sm" placeholder="Quantidade" required/>
                         </div>
                         <div className="col p-1">
-                            <input type="text" id="fvalor" className="form-control form-control-sm" placeholder="Valor"/>
+                            <input type="number" id="fvalor" pattern="[0-9]+" className="form-control form-control-sm" placeholder="Valor" required/>
                         </div>
                             <div className="col p-1">
                         <button type="submit" className="btn btn-primary mb-2">Inserir produto</button>
