@@ -29,12 +29,12 @@ function TabelaCompras(props){
                     {produtos.map((value, index) => (
                         <tr key={value.codigo}>
                             <th scope="row">{value.codigo}</th>
-                            <td><a className="bi me-2 icontrash" href="/#" onClick={() => handlerFavoritoClick(value.codigo)}>{value.favorito?<StarFillIcon size={16}/>:<StarIcon size={16}/>}</a></td>
+                            <td><a className="bi me-2 icontrash" href="/#" onClick={() => handlerFavoritoClick(value.codigo)} title="tornar favorito.">{value.favorito?<StarFillIcon size={16}/>:<StarIcon size={16}/>}</a></td>
                             <td>{value.produto}</td>
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
                             <td>R$ {value.valor.toFixed(2)}</td>
-                            <td><a className="bi me-2 icontrash" href="/#" onClick={() => handlerClick(value.codigo)}>{tipoLista==="produtos"?<TrashIcon size={16}/>:<ReplyIcon size={16}/>}</a></td>
+                            <td><a className="bi me-2 icontrash" href="/#" onClick={() => handlerClick(value.codigo)} title={tipoLista==="produtos"?"Excluir produto.":"Restaurar produto."}>{tipoLista==="produtos"?<TrashIcon size={16}/>:<ReplyIcon size={16}/>}</a></td>
                         </tr>
                     ))}                    
                 </tbody>
