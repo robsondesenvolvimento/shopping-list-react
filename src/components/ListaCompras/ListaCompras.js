@@ -91,7 +91,7 @@ function ListaCompras(props){
                             <input type="text" id="fvalor" pattern="[0-9]+(\.[0-9]+)?" className="form-control form-control-sm" placeholder="Valor" required/>
                         </div>
                             <div className="col p-1">
-                        <button type="submit" className="btn btn-primary mb-2">Inserir produto</button>
+                        <button type="submit" className="btn btn-primary mb-2" title="Inserir novo produto.">Inserir produto</button>
                         </div>
                     </div>
                 </form>
