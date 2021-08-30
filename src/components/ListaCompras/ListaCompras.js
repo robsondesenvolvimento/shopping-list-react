@@ -49,11 +49,19 @@ function ListaCompras(props){
 
         let codigo = 0;
 
-        if(produtos.length <= 0){
+        if(produtos.length <= 0 && produtosExluidos.length <= 0){
             codigo = 1;
         }
         else {
-            codigo = Number.parseInt(produtos.map(value => value.codigo).reduce((a,b) => Math.max(a,b)));
+            let produtosMax = 0;
+            let prodExcluidosMax = 0;
+
+            if(produtos.length > 0)
+                produtosMax = Number.parseInt(produtos.map(value => value.codigo).reduce((a,b) => Math.max(a,b)));
+            if(produtosExluidos.length > 0)
+                prodExcluidosMax = Number.parseInt(produtosExluidos.map(value => value.codigo).reduce((a,b) => Math.max(a,b)));
+
+            codigo = produtosMax > prodExcluidosMax?produtosMax:prodExcluidosMax;
             codigo += 1;
         }        
 
