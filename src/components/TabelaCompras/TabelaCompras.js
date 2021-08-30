@@ -4,12 +4,15 @@ import './TabelaCompras.css';
 
 function TabelaCompras(props) {
 
-    let produtos = props.produtos.sort((a, b) => a.codigo - b.codigo);
-    produtos = produtos.sort((a, b) => !a.favorito - !b.favorito)
-    const handlerClick = props.handlerExcluirClick;
-    const handlerFavoritoClick = props.handlerFavoritoClick;
-    const descricaoTotal = props.descricaoTotal;
-    const tipoLista = props.tipoLista;
+    let produtos = props.produtos === undefined?[]:props.produtos;
+    if(produtos.length > 0){
+        produtos = produtos.sort((a, b) => a.codigo - b.codigo);
+        produtos = produtos.sort((a, b) => !a.favorito - !b.favorito);
+    }
+    const handlerClick = props.handlerExcluirClick === undefined?() => {}:props.handlerExcluirClick;
+    const handlerFavoritoClick = props.handlerFavoritoClick === undefined?() => {}:props.handlerFavoritoClick;
+    const descricaoTotal = props.descricaoTotal === undefined?"":props.descricaoTotal;
+    const tipoLista = props.tipoLista === undefined?"produtos":props.tipoLista;
 
     return (
         <div className="p-4">

@@ -22,7 +22,7 @@ function ListaCompras(props){
         setProdutos(produtos.filter(prod => prod.codigo !== key));
     };
 
-    const handlerExcluidosClick = (key) => {
+    const handlerRestautarClick = (key) => {
         setProdutos(produtos.concat(produtosExluidos.filter(prod => prod.codigo === key)));
         setProdutosExcluidos(produtosExluidos.filter(prod => prod.codigo !== key));
     };
@@ -115,7 +115,7 @@ function ListaCompras(props){
                 Lista de compras excluidas &nbsp;
                 <span class="badge bg-danger rounded-pill">{produtosExluidos.length}+</span>
             </h3>
-            <TabelaCompras produtos={produtosExluidos} tipoLista="excluidos" handlerExcluirClick={handlerExcluidosClick} handlerFavoritoClick={() => {}} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
+            <TabelaCompras produtos={produtosExluidos} tipoLista="excluidos" handlerExcluirClick={handlerRestautarClick} descricaoTotal="Soma do valor de todos os produtos excluídos."/>
         </div>
     )
 
