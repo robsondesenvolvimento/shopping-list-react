@@ -32,15 +32,15 @@ function TabelaCompras(props) {
                             <td>
                                 {
                                     tipoLista === "produtos" ?
-                                        <div className="icontrash" onClick={() => handlerFavoritoClick(value.codigo)} title="tornar favorito.">{value.favorito ? <StarFillIcon size={16} /> : <StarIcon size={16} />}</div> :
-                                        <div title="tornar favorito.">{value.favorito ? <StarFillIcon size={16} /> : <StarIcon size={16} />}</div>
+                                        <div className="icontrash" onClick={() => handlerFavoritoClick(value.codigo)} title={`Tornar favorito item ${value.codigo}`}>{value.favorito ? <StarFillIcon size={16} /> : <StarIcon size={16} />}</div> :
+                                        <div title={`Tornar favorito item ${value.codigo}`}>{value.favorito ? <StarFillIcon size={16} /> : <StarIcon size={16} />}</div>
                                 }
                             </td>
                             <td>{value.produto}</td>
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
                             <td>R$ {value.valor.toFixed(2)}</td>
-                            <td><div className="icontrash" href="/#" onClick={() => handlerClick(value.codigo)} title={tipoLista === "produtos" ? "Excluir produto." : "Restaurar produto."}>{tipoLista === "produtos" ? <TrashIcon size={16} /> : <ReplyIcon size={16} />}</div></td>
+                            <td><div className="icontrash" href="/#" onClick={() => handlerClick(value.codigo)} title={tipoLista === "produtos" ? `Excluir produto item ${value.codigo}` : `Restaurar produto item ${value.codigo}`}>{tipoLista === "produtos" ? <TrashIcon size={16} /> : <ReplyIcon size={16} />}</div></td>
                         </tr>
                     ))}
                 </tbody>
