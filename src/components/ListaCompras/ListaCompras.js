@@ -3,7 +3,15 @@ import { TabelaCompras } from '../TabelaCompras';
 
 function ListaCompras(props){
 
-    const [produtos, setProdutos] = useState(props.produtos);
+    const [produtos, setProdutos] = useState([].concat(
+        { codigo: 1, produto: "Blusa", descricao: "Blusa XL", quantidade: 1, valor: 100.12, favorito: true },
+        { codigo: 2, produto: "Calça", descricao: "Calça jeans", quantidade: 1, valor: 98.12, favorito: false },
+        { codigo: 3, produto: "Meia", descricao: "Algodão", quantidade: 1, valor: 10.19, favorito: false },
+        { codigo: 4, produto: "Camisa", descricao: "Polo", quantidade: 1, valor: 50.12, favorito: true },
+        { codigo: 5, produto: "Notebook", descricao: "Nova gerção", quantidade: 1, valor: 3050.40, favorito: false },
+        { codigo: 6, produto: "Celular", descricao: "Samsung", quantidade: 1, valor: 2080.00, favorito: false }
+        ));
+
     const [produtosExluidos, setProdutosExcluidos] = useState([]);
 
     const handlerExcluirClick = (key) => {
@@ -39,7 +47,17 @@ function ListaCompras(props){
         const quantidade = document.getElementById("fquantidade").value;
         const valor = document.getElementById("fvalor").value;
 
-        const codigo = Number.parseInt(produtos.map(value => value.codigo).reduce((a,b) => Math.max(a,b))) + 1;
+        let codigo = 0;
+
+        if(produtos.length <= 0){
+            codigo = 1;
+        }
+        else {
+            codigo = Number.parseInt(produtos.map(value => value.codigo).reduce((a,b) => Math.max(a,b)));
+            codigo += 1;
+        }        
+
+        if(Number.isNaN(codigo)) codigo = 1;
 
         var prod = { 
             codigo: codigo, 
@@ -50,13 +68,15 @@ function ListaCompras(props){
             favorito: false
         };
 
-        setProdutos(produtos.concat(prod))
+        setProdutos(produtos.concat(prod));
+
+        document.getElementById("formprodutos").reset();
     };
 
     return (
         <div className="p-4">
             <div className="p-4">
-                <form className="form-inline" onSubmit={handlerFormSubmit}>
+                <form className="form-inline" onSubmit={handlerFormSubmit} id="formprodutos">
                     <div className="form-group">
                         <div className="col p-1">
                             <input type="text" id="fproduto" maxlength="30" className="form-control form-control-sm" placeholder="Produto" required/>
