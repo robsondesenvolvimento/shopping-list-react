@@ -42,7 +42,7 @@ function TabelaCompras(props) {
                             <td>{value.produto}</td>
                             <td>{value.descricao}</td>
                             <td>{value.quantidade}</td>
-                            <td>R$ {value.valor.toFixed(2)}</td>
+                            <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 }).format(value.valor)}</td>
                             <td><div className="icontrash" href="/#" onClick={() => handlerClick(value.codigo)} title={tipoLista === "produtos" ? `Excluir produto item ${value.codigo}` : `Restaurar produto item ${value.codigo}`}>{tipoLista === "produtos" ? <TrashIcon size={16} /> : <ReplyIcon size={16} />}</div></td>
                         </tr>
                     ))}
@@ -52,7 +52,11 @@ function TabelaCompras(props) {
                         <th scope="row"><abbr title={descricaoTotal} class="initialism">Total</abbr></th>
                         <th colSpan="3" style={{ "text-align": "left" }}></th>
                         <td className="h6">{produtos.reduce((accumulator, currentValue) => accumulator + currentValue.quantidade, 0)}</td>
-                        <td className="h6">R$ {produtos.reduce((accumulator, currentValue) => accumulator + currentValue.valor, 0).toFixed(2)}</td>
+                        <td className="h6">
+                            {
+                                new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 }).format(produtos.reduce((accumulator, currentValue) => accumulator + currentValue.valor, 0))
+                            }
+                        </td>
                         <th></th>
                     </tr>
                 </tfoot>
