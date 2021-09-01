@@ -3,6 +3,11 @@ import { TabelaCompras } from '../TabelaCompras';
 
 function ListaCompras(props){
 
+    const [produto, SetProduto] = useState("");
+    const [descricao, SetDescricao] = useState("");
+    const [quantidade, SetQuantidade] = useState(0);
+    const [valor, SetValor] = useState(0.0);
+
     const [produtos, setProdutos] = useState([].concat(
         { codigo: 1, produto: "Blusa", descricao: "Blusa XL", quantidade: 1, valor: 100.50, favorito: true },
         { codigo: 2, produto: "Calça", descricao: "Calça jeans", quantidade: 1, valor: 50.50, favorito: false },
@@ -42,10 +47,6 @@ function ListaCompras(props){
 
     const handlerFormSubmit = (event) => {
         event.preventDefault();
-        const produto = document.getElementById("fproduto").value;
-        const descricao = document.getElementById("fdescricao").value;
-        const quantidade = document.getElementById("fquantidade").value;
-        const valor = document.getElementById("fvalor").value;
 
         let codigo = 0;
 
@@ -57,9 +58,9 @@ function ListaCompras(props){
             let prodExcluidosMax = 0;
 
             if(produtos.length > 0)
-                produtosMax = Number.parseInt(produtos.map(value => value.codigo).reduce((a,b) => Math.max(a,b)));
+                produtosMax = produtos.map(value => value.codigo).reduce((a,b) => Math.max(a,b));
             if(produtosExluidos.length > 0)
-                prodExcluidosMax = Number.parseInt(produtosExluidos.map(value => value.codigo).reduce((a,b) => Math.max(a,b)));
+                prodExcluidosMax = produtosExluidos.map(value => value.codigo).reduce((a,b) => Math.max(a,b));
 
             codigo = produtosMax > prodExcluidosMax?produtosMax:prodExcluidosMax;
             codigo += 1;
@@ -87,16 +88,16 @@ function ListaCompras(props){
                 <form className="form-inline" onSubmit={handlerFormSubmit} id="formprodutos">
                     <div className="form-group">
                         <div className="col p-1">
-                            <input type="text" id="fproduto" maxlength="30" className="form-control form-control-sm" placeholder="Produto" required/>
+                            <input type="text" id="fproduto" maxlength="30" className="form-control form-control-sm" placeholder="Produto" onChange={(campo) => SetProduto(campo.target.value)} required/>
                         </div>
                         <div className="col p-1">
-                            <input type="text" id="fdescricao" maxlength="30" className="form-control form-control-sm" placeholder="Descrição" required/>
+                            <input type="text" id="fdescricao" maxlength="30" className="form-control form-control-sm" placeholder="Descrição" onChange={(campo) => SetDescricao(campo.target.value)} required/>
                         </div>
                         <div className="col p-1">
-                            <input type="number" id="fquantidade" pattern="[0-9]+" min="1" max="50" title="Quantidade de produtos." className="form-control form-control-sm" placeholder="Quantidade" required/>
+                            <input type="number" id="fquantidade" pattern="[0-9]+" min="1" max="50" title="Quantidade de produtos." className="form-control form-control-sm" placeholder="Quantidade" onChange={(campo) => SetQuantidade(campo.target.value)} required/>
                         </div>
                         <div className="col p-1">
-                            <input type="text" id="fvalor" pattern="[0-9]+(\.[0-9]+)?" className="form-control form-control-sm" placeholder="Valor" required/>
+                            <input type="text" id="fvalor" pattern="[0-9]+(\.[0-9]+)?" className="form-control form-control-sm" placeholder="Valor" onChange={(campo) => SetValor(campo.target.value)} required/>
                         </div>
                             <div className="col p-1">
                         <button type="submit" className="btn btn-primary mb-2" title="Inserir novo produto.">Inserir produto</button>
